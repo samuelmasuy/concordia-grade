@@ -1,7 +1,7 @@
 module.exports.retrieveEnv = function (env) {
   const setting = process.env[env]
   if (!setting) {
-    throw new Error(`The environmental variable ${env} must be set`)
+    throw new Error(`The environment variable ${env} must be set`)
   }
   return setting
 }
