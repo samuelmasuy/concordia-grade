@@ -1,0 +1,20 @@
+{
+  "name": "grade-concordia",
+  "version": "1.0.0",
+  "description": "Check Concordia grades and send notification to Pushbullet devices if any new grade comes in 💯.",
+  "main": "gradecheck.js",
+  "scripts": {
+    "test": "ava \"*.test.js\" --verbose",
+    "watch:test": "npm run test -- --watch",
+    "start": "node gradecheck.js"
+  },
+  "author": "Samuel Masuy <samuel.masuy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nightmare": "^2.9.1",
+    "pushbullet": "^1.4.3"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0"
+  }
+}
