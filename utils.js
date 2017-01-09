@@ -32,7 +32,7 @@ module.exports.coursesDiff = function (coursesPrevious, coursesCurrent) {
 module.exports.formatCoursesList = function (courses) {
   return courses.map((c) => {
     return `Course: ${c.course}, Grade: ${c.grade}`
-  }).join('\n') + '\nCongratulations!'
+  }).join('\n') + '\nCongratulations! 👍'
 }
 
 module.exports.interval = function (func, wait) {
