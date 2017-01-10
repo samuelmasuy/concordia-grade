@@ -9,14 +9,14 @@ Check Concordia grades and send notification to [Pushbullet](https://docs.pushbu
 
 Get API token for [Pushbullet](https://docs.pushbullet.com/)
 
-Fill `env.list.todo` and rename the file.
+Fill `env.list.todo` and rename it with `env.list`.
 
 ## Run
 
 ### Locally (Node)
 
 ```bash
-$ npm install --production
+$ npm install --production # install only production dependencies
 $ PUSHBULLET_TOKEN=<> CONCORDIA_USERNAME=<> CONCORDIA_PASSWORD=<> INTERVAL_CHECK_M=<> npm start
 ```
 
@@ -26,8 +26,12 @@ $ PUSHBULLET_TOKEN=<> CONCORDIA_USERNAME=<> CONCORDIA_PASSWORD=<> INTERVAL_CHECK
 $ docker build -t gradecheck .
 $ docker tag gradecheck:latest <TAG>
 $ docker run -d --env-file ./env.list <TAG>
-# or
-$ docker pull samuelmasuy/gradecheck-concordia
+```
+
+Or,
+
+```bash
+$ docker pull samuelmasuy/gradecheck-concordia # pull image from docker hub
 $ docker run -d --env-file ./env.list samuelmasuy/gradecheck-concordia:latest
 ```
 
@@ -36,20 +40,25 @@ $ docker run -d --env-file ./env.list samuelmasuy/gradecheck-concordia:latest
 Run with [AWS EC2 Container Service](https://aws.amazon.com/ecs/),
 see `gradecheck-task.ecs.aws.json` for a task definition example.
 
-## Test (AVA)
+## Development
 
 ```bash
-$ npm install
-$ npm run test
-# or
-$ npm run watch:test
+$ npm install # install all dependencies including dev dependencies
 ```
 
-## Lint (Standard)
+### Test (AVA)
+
+```bash
+$ npm run test
+$ npm run watch:test # watch mode
+```
+
+### Lint (Standard)
 
 ```bash
 $ npm run lint
 ```
+
 ## License (MIT)
 
 See LICENCE
