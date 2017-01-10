@@ -10,7 +10,6 @@ const utils = require('./utils')
 const PUSHBULLET_TOKEN = utils.retrieveEnv('PUSHBULLET_TOKEN')
 const CONCORDIA_USERNAME = utils.retrieveEnv('CONCORDIA_USERNAME')
 const CONCORDIA_PASSWORD = utils.retrieveEnv('CONCORDIA_PASSWORD')
-const INTERVAL_CHECK_MS = process.env.INTERVAL_CHECK_MS || 1800000 // 30 minutes
 
 const nightmare = Nightmare({
   show: false,
@@ -48,39 +47,35 @@ function sendNotification (newCourses) {
   })
 }
 
-function run () {
-  console.log('running job')
-  nightmare
-      .goto('https://m.myconcordia.ca')
-      .click('#netname')
-      .type('#netname', CONCORDIA_USERNAME)
-      .click('#pwd')
-      .type('#pwd', CONCORDIA_PASSWORD)
-      .click('#btnLogin')
-      .wait(10000) // allow time to login
-      .click('#btnGrade')
-      .wait(5000) // allow time to load the grades
-      .evaluate((classname) => {
-        const elements = document.getElementsByClassName(classname)
-        return Object.keys(elements).map((element) => {
-          return elements[element].innerText
-        })
-      }, 'mainsec')
-      .end()
-      .then((result) => {
-        const previousCourses = require(COURSES_FILE)
-        const currentCourses = utils.parseCourses(result)
-        const newCourses = utils.coursesDiff(previousCourses, currentCourses)
-        if (newCourses.length !== 0) {
-          sendNotification(newCourses)
-          fs.writeFile(COURSES_FILE, JSON.stringify(currentCourses), 'utf8', (err) => { if (err) { throw err } })
-        }
+console.log('running job')
+nightmare
+    .goto('https://m.myconcordia.ca')
+    .click('#netname')
+    .type('#netname', CONCORDIA_USERNAME)
+    .click('#pwd')
+    .type('#pwd', CONCORDIA_PASSWORD)
+    .click('#btnLogin')
+    .wait(10000) // allow time to login
+    .click('#btnGrade')
+    .wait(7000) // allow time to load the grades
+    .click('#btnAllGrades')
+    .wait(7000) // allow time to load all the grades
+    .evaluate((classname) => {
+      const elements = document.getElementsByClassName(classname)
+      return Object.keys(elements).map((element) => {
+        return elements[element].innerText
       })
-      .catch((error) => {
-        console.error('Error:', error)
-      })
-}
-
-utils.interval(() => {
-  run()
-}, INTERVAL_CHECK_MS)
+    }, 'mainsec')
+    .end()
+    .then((result) => {
+      const previousCourses = require(COURSES_FILE)
+      const currentCourses = utils.parseCourses(result)
+      const newCourses = utils.coursesDiff(previousCourses, currentCourses)
+      if (newCourses.length !== 0) {
+        sendNotification(newCourses)
+        fs.writeFile(COURSES_FILE, JSON.stringify(currentCourses), 'utf8', (err) => { if (err) { throw err } })
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })

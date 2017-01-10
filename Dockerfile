@@ -1,4 +1,5 @@
 FROM node:latest
+MAINTAINER samuel.masuy@gmail.com
 RUN apt-get update &&\
     apt-get install -y \
     xvfb \
@@ -26,5 +27,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install --production
-COPY gradecheck.js utils.js /usr/src/app
-CMD DEBUG=nightmare* xvfb-run --server-args="-screen 0 1024x768x24" npm start
+COPY gradecheck.js utils.js /usr/src/app/
+ADD grade-job.sh /usr/src/app/
+RUN chmod +x grade-job.sh
+CMD ["./grade-job.sh"]
+# CMD DEBUG=nightmare* xvfb-run --server-args="-screen 0 1024x768x24" npm start

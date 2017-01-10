@@ -34,18 +34,3 @@ module.exports.formatCoursesList = function (courses) {
     return `Course: ${c.course}, Grade: ${c.grade}`
   }).join('\n') + '\nCongratulations! 👍'
 }
-
-module.exports.interval = function (func, wait) {
-  let interv = (function (w) {
-    return () => {
-      setTimeout(interv, w)
-      try {
-        func()
-      } catch (e) {
-        throw e.toString()
-      }
-    }
-  }(wait))
-
-  setTimeout(interv)
-}

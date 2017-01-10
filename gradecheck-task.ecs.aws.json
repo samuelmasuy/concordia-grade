@@ -1,0 +1,53 @@
+{
+    "networkMode": "bridge",
+    "taskRoleArn": null,
+    "containerDefinitions": [
+        {
+            "volumesFrom": null,
+            "memory": 128,
+            "extraHosts": null,
+            "dnsServers": null,
+            "disableNetworking": null,
+            "dnsSearchDomains": null,
+            "portMappings": [],
+            "hostname": null,
+            "essential": true,
+            "entryPoint": null,
+            "mountPoints": null,
+            "name": "gradecheck",
+            "ulimits": null,
+            "dockerSecurityOptions": null,
+            "environment": [
+                {
+                    "name": "CONCORDIA_PASSWORD",
+                    "value": "<your concordia password>"
+                },
+                {
+                    "name": "CONCORDIA_USERNAME",
+                    "value": "<your concordia username>"
+                },
+                {
+                    "name": "INTERVAL_CHECK_M",
+                    "value": "<polling interval in minutes to check for grades>"
+                },
+                {
+                    "name": "PUSHBULLET_TOKEN",
+                    "value": "<your pushbullet token found in API>"
+                }
+            ],
+            "links": null,
+            "workingDirectory": null,
+            "readonlyRootFilesystem": null,
+            "image": "samuelmasuy/gradecheck-concordia:latest",
+            "command": null,
+            "user": null,
+            "dockerLabels": null,
+            "logConfiguration": null,
+            "cpu": 0,
+            "privileged": null
+        }
+    ],
+    "placementConstraints": [],
+    "volumes": [],
+    "family": "gradecheck"
+}

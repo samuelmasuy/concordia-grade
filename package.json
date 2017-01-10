@@ -6,6 +6,7 @@
   "scripts": {
     "test": "ava \"*.test.js\" --verbose",
     "watch:test": "npm run test -- --watch",
+    "lint": "standard",
     "start": "node gradecheck.js"
   },
   "author": "Samuel Masuy <samuel.masuy@gmail.com>",
@@ -15,6 +16,7 @@
     "pushbullet": "^1.4.3"
   },
   "devDependencies": {
-    "ava": "^0.17.0"
+    "ava": "^0.17.0",
+    "standard": "^8.6.0"
   }
 }
