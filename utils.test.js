@@ -34,8 +34,18 @@ test('it returns the value of the environment variable if it is set', (t) => {
 })
 
 test('it parses courses', (t) => {
-  parseCourses([])
-  t.pass()
+  const input = [
+    'COMP 301 CRITICAL SCIENCESection: EC ↵Grade: A-',
+    'COMP 101 PERSPECTIVE ONSSection: B ↵Grade:',
+    'COMP 401 COOP WORK (COMP)Section: CW ↵Grade: PASS',
+    'COMP 201 ARTIFICIAL INTELLIGENCESection: F ↵Grade:',
+    'COMP 501 WEB SERVICESSSection: NN ↵Grade: A+']
+  const expected = [
+    {course: 'COMP 301', grade: 'A-'},
+    {course: 'COMP 401', grade: 'PASS'},
+    {course: 'COMP 501', grade: 'A+'}]
+  const output = parseCourses(input)
+  t.deepEqual(output, expected)
 })
 
 test('it formats the list of courses', (t) => {

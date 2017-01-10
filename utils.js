@@ -18,6 +18,8 @@ module.exports.parseCourses = function (result) {
       return {course: course, grade: gradeSplit[1].trim()}
     }
     return {course: course, grade: ''}
+  }).filter((s) => {
+    return s.grade !== ''
   })
 }
 
