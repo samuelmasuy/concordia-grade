@@ -12,7 +12,7 @@ const CONCORDIA_USERNAME = utils.retrieveEnv('CONCORDIA_USERNAME')
 const CONCORDIA_PASSWORD = utils.retrieveEnv('CONCORDIA_PASSWORD')
 
 const nightmare = Nightmare({
-  show: false,
+  show: true,
   switches: {
     'ignore-certificate-errors': true
   }
