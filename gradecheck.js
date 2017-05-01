@@ -49,17 +49,17 @@ function sendNotification (newCourses) {
 
 console.log('running job')
 nightmare
-    .goto('https://m.myconcordia.ca')
-    .click('#netname')
-    .type('#netname', CONCORDIA_USERNAME)
+    .goto('https://my.concordia.ca/psp/upprpr9/?cmd=login&device=mobile')
+    .click('#userid')
+    .type('#userid', CONCORDIA_USERNAME)
     .click('#pwd')
     .type('#pwd', CONCORDIA_PASSWORD)
-    .click('#btnLogin')
-    .wait(10000) // allow time to login
+    .click('#login > table > tbody > tr:nth-child(4) > td:nth-child(2) > input')
+    .wait(12000) // allow time to login
     .click('#btnGrade')
-    .wait(7000) // allow time to load the grades
+    .wait(9000) // allow time to load the grades
     .click('#btnAllGrades')
-    .wait(7000) // allow time to load all the grades
+    .wait(9000) // allow time to load all the grades
     .evaluate((classname) => {
       const elements = document.getElementsByClassName(classname)
       return Object.keys(elements).map((element) => {
